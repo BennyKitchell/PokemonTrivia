@@ -105,13 +105,13 @@
 		7D6E282FD83EC3F427CC83836062AD5A /* HTTPError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPError.swift; path = PokemonAPI/Network/HTTPError.swift; sourceTree = "<group>"; };
 		8119B7AE120CD7CC963E7B32BAC7D66F /* ContestService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ContestService.swift; path = PokemonAPI/WebServices/ContestService.swift; sourceTree = "<group>"; };
 		889DB53EFC100492D53D060D9EAEE343 /* Pods-PokemonTrivia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PokemonTrivia.release.xcconfig"; sourceTree = "<group>"; };
-		8EB35C2DB6CAD8593DDC0E4E5F75D781 /* PokemonAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PokemonAPI.framework; path = PokemonAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8EB35C2DB6CAD8593DDC0E4E5F75D781 /* PokemonAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PokemonAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F2663EF0226AE13A8ACCD1DE9FABAF7 /* Games.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Games.swift; path = PokemonAPI/Classes/Games.swift; sourceTree = "<group>"; };
 		928DDD86384D3C5AD3C30E5D0A677396 /* PokemonAPI-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PokemonAPI-Info.plist"; sourceTree = "<group>"; };
 		98FE96B681F2C19031310F4B787E33C1 /* HTTPWebService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPWebService.swift; path = PokemonAPI/Network/HTTPWebService.swift; sourceTree = "<group>"; };
 		99FBD7F69448B7DF8440ABD5546760D6 /* MoveService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MoveService.swift; path = PokemonAPI/WebServices/MoveService.swift; sourceTree = "<group>"; };
 		9ADF68473693FE89E811C4DD62F57BF5 /* URL+Query.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URL+Query.swift"; path = "PokemonAPI/Utilities/URL+Query.swift"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A48B48E37F641FD156E89879ADD4C0AF /* PokemonAPI-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PokemonAPI-umbrella.h"; sourceTree = "<group>"; };
 		AAD3EC43235C0FAA17DF24ADB9E10F6B /* Items.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Items.swift; path = PokemonAPI/Classes/Items.swift; sourceTree = "<group>"; };
 		AC37EBFF90D926A391030676F5E1B468 /* PokemonAPI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PokemonAPI.swift; path = PokemonAPI/Classes/PokemonAPI.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		D84A39971A9E0FF781803359DFF33685 /* URLRequest+.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+.swift"; path = "PokemonAPI/Utilities/URLRequest+.swift"; sourceTree = "<group>"; };
 		DE1D0DE40E7CBA36F98919DBA529EA58 /* URLSession+Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLSession+Request.swift"; path = "PokemonAPI/Utilities/URLSession+Request.swift"; sourceTree = "<group>"; };
 		E4DF73FD0A75409C8C6C115B2A49B5CE /* Decodable+Decode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Decodable+Decode.swift"; path = "PokemonAPI/Utilities/Decodable+Decode.swift"; sourceTree = "<group>"; };
-		E9A21DF9714828A14EFAB6FE2E3B8217 /* Pods_PokemonTrivia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PokemonTrivia.framework; path = "Pods-PokemonTrivia.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9A21DF9714828A14EFAB6FE2E3B8217 /* Pods_PokemonTrivia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PokemonTrivia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECB13B9A0DE3957415C7EF4BF959455B /* ItemService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ItemService.swift; path = PokemonAPI/WebServices/ItemService.swift; sourceTree = "<group>"; };
 		ED42C9AF796851F6DA5ACEBE89EDD03C /* Result+Decode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Result+Decode.swift"; path = "PokemonAPI/Network/Result+Decode.swift"; sourceTree = "<group>"; };
 		EEA2039FC2892B429A7DBAD52B9E6C55 /* PokemonAPI.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PokemonAPI.modulemap; sourceTree = "<group>"; };
@@ -263,7 +263,6 @@
 				7D45805992A1685A841B94ECC36CE247 /* UtilityService.swift */,
 				0DFA075AFE8D4BD79B7A126894AC7DE1 /* Support Files */,
 			);
-			name = PokemonAPI;
 			path = PokemonAPI;
 			sourceTree = "<group>";
 		};
@@ -350,7 +349,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 9.3";
@@ -677,7 +676,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/PokemonAPI/PokemonAPI-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/PokemonAPI/PokemonAPI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,7 +711,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/PokemonAPI/PokemonAPI-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/PokemonAPI/PokemonAPI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

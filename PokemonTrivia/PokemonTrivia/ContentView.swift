@@ -46,56 +46,66 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Who's that pokemon?")
-//            Image(systemName: "pencil")
-//                .renderingMode(.original)
+                .foregroundColor(.white)
+                .font(.title)
             Image(uiImage: poke.load())
                 .antialiased(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 .resizable()
                 .frame(width: 200, height: 200)
                 .clipped()
-            Spacer()
-            VStack(spacing: 100) {
-                HStack(spacing: 100) {
+            
+            VStack() {
+                VStack(spacing: 20) {
                     Button(action: {
                         getPokemon()
                     }){
-                        Text("Bulbusaur")
+                        HStack {
+                            Text("Bulbusaur")
+                        }
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.gray)
+                        .cornerRadius(40)
+                        
                     }
-                        .background(Color.red)
-                        .foregroundColor(Color.white)
-                        .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
-
+                        
                     Button(action: {
                         getPokemon()
                     }){
-                        Text("Squirtle")
+                        HStack {
+                            Text("Squirtle")
+                        }
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.gray)
+                        .cornerRadius(40)
                     }
-                        .background(Color.red)
-                        .foregroundColor(Color.white)
-                }
-
-                HStack(spacing: 100) {
+                        
                     Button(action: {
                         getPokemon()
                     }){
-                        Text("Charmander")
+                        HStack {
+                            Text("Charmander")
+                        }
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(Color.gray)
+                        .cornerRadius(40)
                     }
-                        .background(Color.red)
-                        .foregroundColor(Color.white)
-
-                    Button(action: {
-                        getPokemon()
-                    }){
-                        Text("Mankey")
-                    }                        .background(Color.red)
-                        .foregroundColor(Color.white)
                 }
             }
             Spacer()
         }
-            .onAppear() {
-                getPokemon()
-            }
+        .background(
+            LinearGradient(gradient: Gradient(colors: [.red, .white, ]), startPoint: .top, endPoint: .bottom)
+        )
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+        .onAppear() {
+            getPokemon()
+        }
     }
 }
 
