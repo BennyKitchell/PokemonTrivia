@@ -45,9 +45,10 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Who's that pokemon?")
-                .foregroundColor(.white)
-                .font(.title)
+            Image("poke")
+                .resizable()
+                .scaledToFit()
+                .padding(20)
             Image(uiImage: poke.load())
                 .antialiased(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
                 .resizable()
@@ -65,7 +66,7 @@ struct ContentView: View {
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.gray)
+                        .background(Color.secondary)
                         .cornerRadius(40)
                         
                     }
@@ -79,7 +80,7 @@ struct ContentView: View {
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.gray)
+                        .background(Color.secondary)
                         .cornerRadius(40)
                     }
                         
@@ -92,7 +93,7 @@ struct ContentView: View {
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(Color.gray)
+                        .background(Color.secondary)
                         .cornerRadius(40)
                     }
                 }
