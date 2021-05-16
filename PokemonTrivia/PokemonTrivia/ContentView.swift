@@ -29,83 +29,124 @@ extension String {
 }
 
 struct ContentView: View {
-    @State private var poke:String = ""
+    @State private var pokeAnswer:String = ""
+    @State private var pokeSprite = ""
+    @State private var pokeArray: [String] = []
+    @State var userScore = 0
+//    @State var highScore = 0
+    
+    @State private var showingScore = false
+    @State private var scoreTitle = ""
+    
+    func checkAnswer(index: Int) {
+        if (pokeArray[index] == pokeAnswer) {
+            scoreTitle = "Correct!"
+            userScore += 1
+        } else {
+            scoreTitle = "Sorry, the correct answer is \(pokeAnswer)"
+            userScore = 0
+        }
+        
+        showingScore = true
+    }
     
     func getPokemon() {
-        let randomNum = Int.random(in: 1 ..< 898)
-        PokemonAPI().pokemonService.fetchPokemon(randomNum) { result in
-            switch result {
-            case .success(let pokemon):
-                self.poke = pokemon.sprites?.frontDefault ?? "Empty"// bulbasaur
-            case .failure(let error):
-                print(error.localizedDescription)
+        pokeArray.removeAll()
+        for index in 0 ..< 3 {
+            let randomNum = Int.random(in: 1 ..< 898)
+            PokemonAPI().pokemonService.fetchPokemon(randomNum) { result in
+                switch result {
+                case .success(let pokemon):
+                    if (index == 0) {
+                        self.pokeSprite = pokemon.sprites?.frontDefault ?? "Empty"// bulbasaur
+                        self.pokeAnswer = pokemon.name?.capitalized ?? "Empty"
+                        self.pokeArray.append(pokemon.name?.capitalized ?? "Empty")
+                    } else {
+                        self.pokeArray.append(pokemon.name?.capitalized ?? "Empty")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
+        self.pokeArray.shuffle()
     }
     
     var body: some View {
-        VStack {
-            Image("poke")
-                .resizable()
-                .scaledToFit()
-                .padding(20)
-            Image(uiImage: poke.load())
-                .antialiased(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                .resizable()
-                .frame(width: 200, height: 200)
-                .clipped()
-            
-            VStack() {
-                VStack(spacing: 20) {
-                    Button(action: {
-                        getPokemon()
-                    }){
-                        HStack {
-                            Text("Bulbusaur")
+        ZStack {
+            VStack {
+                Image("poke")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(20)
+                Image(uiImage: pokeSprite.load())
+                    .antialiased(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .clipped()
+                
+                VStack() {
+                    VStack(spacing: 20) {
+                        Button(action: {
+                            checkAnswer(index: 0)
+                        }){
+                            HStack {
+                                if(!pokeArray.isEmpty) {
+                                        Text("\(pokeArray[0])")
+                                    }
+                                }
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.secondary)
+                            .cornerRadius(40)
+                            
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.secondary)
-                        .cornerRadius(40)
-                        
-                    }
-                        
-                    Button(action: {
-                        getPokemon()
-                    }){
-                        HStack {
-                            Text("Squirtle")
+                            
+                        Button(action: {
+                            checkAnswer(index: 1)
+                        }){
+                            HStack {
+                                if(pokeArray.count > 1) {
+                                        Text("\(pokeArray[1])")
+                                    }
+                                }
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.secondary)
+                            .cornerRadius(40)
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.secondary)
-                        .cornerRadius(40)
-                    }
-                        
-                    Button(action: {
-                        getPokemon()
-                    }){
-                        HStack {
-                            Text("Charmander")
+                            
+                        Button(action: {
+                            checkAnswer(index: 2)
+                        }){
+                            HStack {
+                                if(pokeArray.count > 2) {
+                                        Text("\(pokeArray[2])")
+                                    }
+                                }
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .background(Color.secondary)
+                            .cornerRadius(40)
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.secondary)
-                        .cornerRadius(40)
                     }
                 }
+                Spacer()
             }
-            Spacer()
+            .background(
+                LinearGradient(gradient: Gradient(colors: [.red, .white, ]), startPoint: .top, endPoint: .bottom)
+            )
+            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+            .onAppear() {
+                getPokemon()
+            }
         }
-        .background(
-            LinearGradient(gradient: Gradient(colors: [.red, .white, ]), startPoint: .top, endPoint: .bottom)
-        )
-        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-        .onAppear() {
-            getPokemon()
+        .alert(isPresented: $showingScore) { Alert( title: Text("\(scoreTitle)"), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
+            self.getPokemon()
+            })
         }
     }
 }
