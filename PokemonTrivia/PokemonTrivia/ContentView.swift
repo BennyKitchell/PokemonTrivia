@@ -2,11 +2,13 @@
 //  ContentView.swift
 //  PokemonTrivia
 //
-//  Created by JoeChanges on 5/14/21.
+//  Created by Benny Kitchell on 5/14/21.
 //
 
 import SwiftUI
 import PokemonAPI
+//@TODO: Code Cleanup
+//@TODO: Minimize api calls with improved API fetch
 
 // Extension from tutorial by  Adnan Afzal
 extension String {
@@ -33,7 +35,7 @@ struct ContentView: View {
     @State private var pokeSprite = ""
     @State private var pokeArray: [String] = []
     @State var userScore = 0
-//    @State var highScore = 0
+    @State var highScore = 0
     
     @State private var showingScore = false
     @State private var scoreTitle = ""
@@ -42,6 +44,9 @@ struct ContentView: View {
         if (pokeArray[index] == pokeAnswer) {
             scoreTitle = "Correct!"
             userScore += 1
+            if(userScore > highScore){
+                highScore = userScore
+            }
         } else {
             scoreTitle = "Sorry, the correct answer is \(pokeAnswer)"
             userScore = 0
@@ -75,6 +80,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack {
+                
                 Image("poke")
                     .resizable()
                     .scaledToFit()
@@ -86,53 +92,53 @@ struct ContentView: View {
                     .clipped()
                 
                 VStack() {
-                    VStack(spacing: 20) {
-                        Button(action: {
-                            checkAnswer(index: 0)
-                        }){
-                            HStack {
-                                if(!pokeArray.isEmpty) {
+                    if(pokeArray.count > 2) {
+                        VStack(spacing: 20) {
+                            Button(action: {
+                                checkAnswer(index: 0)
+                            }){
+                                HStack {
                                         Text("\(pokeArray[0])")
-                                    }
                                 }
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.secondary)
-                            .cornerRadius(40)
-                            
-                        }
-                            
-                        Button(action: {
-                            checkAnswer(index: 1)
-                        }){
-                            HStack {
-                                if(pokeArray.count > 1) {
-                                        Text("\(pokeArray[1])")
-                                    }
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(Color.secondary)
+                                .cornerRadius(40)
+                                
+                            }
+                                
+                            Button(action: {
+                                checkAnswer(index: 1)
+                            }){
+                                HStack {
+                                    Text("\(pokeArray[1])")
                                 }
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.secondary)
-                            .cornerRadius(40)
-                        }
-                            
-                        Button(action: {
-                            checkAnswer(index: 2)
-                        }){
-                            HStack {
-                                if(pokeArray.count > 2) {
-                                        Text("\(pokeArray[2])")
-                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                    .padding()
+                                    .foregroundColor(.white)
+                                    .background(Color.secondary)
+                                    .cornerRadius(40)
+                            }
+                                
+                            Button(action: {
+                                checkAnswer(index: 2)
+                            }){
+                                HStack {
+                                    Text("\(pokeArray[2])")
                                 }
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(Color.secondary)
-                            .cornerRadius(40)
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(Color.secondary)
+                                .cornerRadius(40)
+                            }
                         }
+                        
+                        Text("High Score: \(highScore)")
+                            .padding(20)
                     }
+                    
                 }
                 Spacer()
             }
@@ -148,6 +154,7 @@ struct ContentView: View {
             self.getPokemon()
             })
         }
+        
     }
 }
 
