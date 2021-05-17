@@ -1,5 +1,5 @@
 # PokemonTrivia
-A one page SwiftUI app for pokemon trivia
+A SwiftUI app for pokemon trivia
 
 My first effort in SwiftUI
 
