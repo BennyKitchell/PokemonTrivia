@@ -9,6 +9,7 @@ import SwiftUI
 import PokemonAPI
 //@TODO: Code Cleanup
 //@TODO: Minimize api calls with improved API fetch
+//@TODO: Add a timer for automatic failure case
 
 // Extension from tutorial by  Adnan Afzal
 extension String {
@@ -30,6 +31,21 @@ extension String {
     }
 }
 
+struct ButtonModifier: View {
+    var buttonText: String
+    
+    var body: some View {
+        HStack {
+            Text("\(buttonText)")
+        }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.secondary)
+            .cornerRadius(40)
+    }
+}
+
 struct ContentView: View {
     @State private var pokeAnswer:String = ""
     @State private var pokeSprite = ""
@@ -39,6 +55,54 @@ struct ContentView: View {
     
     @State private var showingScore = false
     @State private var scoreTitle = ""
+    
+    var body: some View {
+        ZStack {
+            VStack {
+                Image("poke")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(10)
+                
+                Image(uiImage: pokeSprite.load())
+                    .antialiased(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                    .clipped()
+                
+                VStack() {
+                    if (pokeArray.count > 2) {
+                        VStack(spacing: 20) {
+                            ForEach(0 ..< 3) { index in
+                                Button(action: {
+                                    checkAnswer(index: index)
+                                }){
+                                    ButtonModifier(buttonText: pokeArray[index])
+                                }
+                            }
+                        }
+                        
+                        Text("High Score: \(highScore)")
+                            .padding(20)
+                            .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    }
+                }
+                Spacer()
+            }
+                .background(
+                LinearGradient(gradient: Gradient(colors: [.red, .white, ]), startPoint: .top, endPoint: .bottom)
+                )
+                .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                .onAppear() {
+                    getPokemon()
+                }
+        }
+                .alert(isPresented: $showingScore) { Alert( title: Text("\(scoreTitle)"), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
+                    self.getPokemon()
+                })
+            }
+        
+    }
     
     func checkAnswer(index: Int) {
         if (pokeArray[index] == pokeAnswer) {
@@ -55,6 +119,10 @@ struct ContentView: View {
         showingScore = true
     }
     
+    func pushPokemonIntoArray(name: String) {
+        pokeArray.append(name)
+    }
+    
     func getPokemon() {
         pokeArray.removeAll()
         for index in 0 ..< 3 {
@@ -63,98 +131,16 @@ struct ContentView: View {
                 switch result {
                 case .success(let pokemon):
                     if (index == 0) {
-                        self.pokeSprite = pokemon.sprites?.frontDefault ?? "Empty"// bulbasaur
+                        self.pokeSprite = pokemon.sprites?.frontDefault ?? "Empty"
                         self.pokeAnswer = pokemon.name?.capitalized ?? "Empty"
-                        self.pokeArray.append(pokemon.name?.capitalized ?? "Empty")
-                    } else {
-                        self.pokeArray.append(pokemon.name?.capitalized ?? "Empty")
                     }
+                    pushPokemonIntoArray(name: pokemon.name?.capitalized ?? "")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         }
         self.pokeArray.shuffle()
-    }
-    
-    var body: some View {
-        ZStack {
-            VStack {
-                
-                Image("poke")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(20)
-                Image(uiImage: pokeSprite.load())
-                    .antialiased(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                    .resizable()
-                    .frame(width: 200, height: 200)
-                    .clipped()
-                
-                VStack() {
-                    if(pokeArray.count > 2) {
-                        VStack(spacing: 20) {
-                            Button(action: {
-                                checkAnswer(index: 0)
-                            }){
-                                HStack {
-                                        Text("\(pokeArray[0])")
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.secondary)
-                                .cornerRadius(40)
-                                
-                            }
-                                
-                            Button(action: {
-                                checkAnswer(index: 1)
-                            }){
-                                HStack {
-                                    Text("\(pokeArray[1])")
-                                }
-                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                    .padding()
-                                    .foregroundColor(.white)
-                                    .background(Color.secondary)
-                                    .cornerRadius(40)
-                            }
-                                
-                            Button(action: {
-                                checkAnswer(index: 2)
-                            }){
-                                HStack {
-                                    Text("\(pokeArray[2])")
-                                }
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .padding()
-                                .foregroundColor(.white)
-                                .background(Color.secondary)
-                                .cornerRadius(40)
-                            }
-                        }
-                        
-                        Text("High Score: \(highScore)")
-                            .padding(20)
-                    }
-                    
-                }
-                Spacer()
-            }
-            .background(
-                LinearGradient(gradient: Gradient(colors: [.red, .white, ]), startPoint: .top, endPoint: .bottom)
-            )
-            .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            .onAppear() {
-                getPokemon()
-            }
-        }
-        .alert(isPresented: $showingScore) { Alert( title: Text("\(scoreTitle)"), message: Text("Your score is \(userScore)"), dismissButton: .default(Text("Continue")) {
-            self.getPokemon()
-            })
-        }
-        
     }
 }
 
